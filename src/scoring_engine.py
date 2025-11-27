@@ -45,31 +45,75 @@ class ScoringEngine:
         return min(1.0, n / max_quality_n)
 
 
-    def evaluate(self, n: float, data):
+    def evaluate(self, n, companies):
         """
-        برای یک n مشخص:
-        - سه امتیاز را حساب می‌کند
-        - امتیاز کل را با وزن‌ها ترکیب می‌کند
-        - یک EvaluationResult می‌سازد
+        محاسبه امتیازهای تعرفه n با استفاده از داده‌های واقعی شرکت‌ها
         """
-        # مرحله 1: محاسبه سه امتیاز پایه
-        score_budget = self.score_budget(n, data)
-        score_health = self.score_health(n, data)
-        score_quality = self.score_quality(n, data)
 
-        # مرحله 2: ترکیب وزن‌ها برای امتیاز کل
-        total = (
-            score_budget * self.settings.budget_weight +
-            score_health * self.settings.health_weight +
-            score_quality * self.settings.quality_weight
+        # -----------------------------------------------------
+        # 1) ستون بودجه
+        # -----------------------------------------------------
+        payout_total = sum(c.invoice_revenue_new(n) for c in companies)
+
+        diff = abs(payout_total - self.settings.target_budget)
+        score_budget = max(0, 1 - diff / self.settings.target_budget)
+
+        # -----------------------------------------------------
+        # 2) ستون سلامت مالی شرکت‌ها
+        #    health_i = تابعی از margin_new(n)
+        # -----------------------------------------------------
+        min_margin = self.settings.min_margin
+
+        company_health_scores = []
+        company_weights = []
+
+        for c in companies:
+            margin = c.margin_new(n)
+
+            if margin <= 0:
+                health = 0
+            elif margin >= min_margin:
+                health = 1
+            else:
+                health = margin / min_margin
+
+            company_health_scores.append(health)
+            company_weights.append(c.invoice_count)
+
+        # میانگین وزن‌دار سلامت
+        if sum(company_weights) == 0:
+            score_health = 0
+        else:
+            score_health = sum(h * w for h, w in zip(company_health_scores, company_weights)) / sum(company_weights)
+
+        # -----------------------------------------------------
+        # 3) ستون کیفیت (success_rate)
+        # -----------------------------------------------------
+        success_rates = [c.success_rate() for c in companies]
+        invoice_weights = [c.invoice_count for c in companies]
+
+        if sum(invoice_weights) == 0:
+            score_quality = 0
+        else:
+            score_quality = sum(sr * w for sr, w in zip(success_rates, invoice_weights)) / sum(invoice_weights)
+
+        # -----------------------------------------------------
+        # 4) ستون نهایی
+        # -----------------------------------------------------
+        score_total = (
+            self.settings.weight_budget * score_budget +
+            self.settings.weight_health * score_health +
+            self.settings.weight_quality * score_quality
         )
 
-        # مرحله 3: ساخت EvaluationResult
+        # -----------------------------------------------------
+        # 5) خروجی
+        # -----------------------------------------------------
         return EvaluationResult(
             n=n,
             score_budget=score_budget,
             score_health=score_health,
             score_quality=score_quality,
-            score_total=total
+            score_total=score_total,
+            extra={"payout_total": payout_total}
         )
-
