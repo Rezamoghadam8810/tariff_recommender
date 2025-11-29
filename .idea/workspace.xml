@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="21d41800-f55f-463f-88aa-b4dec0974e2a" name="Changes" comment="feat: end faze 1" />
+    <list default="true" id="21d41800-f55f-463f-88aa-b4dec0974e2a" name="Changes" comment="feat: end phase 1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -197,7 +199,7 @@
       <workItem from="1764246448729" duration="2004000" />
       <workItem from="1764307228335" duration="11403000" />
       <workItem from="1764332046786" duration="8226000" />
-      <workItem from="1764389450953" duration="6982000" />
+      <workItem from="1764389450953" duration="7874000" />
     </task>
     <task id="LOCAL-00001" summary="chore: initialize project structure with empty modules">
       <created>1764059231107</created>
@@ -262,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1764395188844</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="feat: end phase 1">
+      <created>1764424167649</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1764424167649</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,7 +310,8 @@
     <MESSAGE value="feat: add real tariff recommender and full scoring workflow test" />
     <MESSAGE value="feat: add ImpactReport and full impact analysis pipeline" />
     <MESSAGE value="feat: end faze 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: end faze 1" />
+    <MESSAGE value="feat: end phase 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: end phase 1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/tariff_recommender$test_scoring.coverage" NAME="test_scoring Coverage Results" MODIFIED="1764131795576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
