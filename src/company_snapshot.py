@@ -6,7 +6,10 @@ class CompanySnapshot:
 
     def __init__(
         self,
+        name,
+        year,
         invoice_count,
+        taxpayers_count,
         invoice_revenue,
         invoice_cost,
         support_revenue,
@@ -18,22 +21,27 @@ class CompanySnapshot:
         success_count,
         failed_count
     ):
+        # --- مشخصات شرکت ---
+        self.name = name                      # نام شرکت معتمد
+        self.year = year                      # سال مالی
+        self.taxpayers_count = taxpayers_count  # تعداد مودیان
+
         # --- داده های خام شرکت ---
-        self.invoice_count = invoice_count                   # تعداد صورتحساب‌ها
-        self.invoice_revenue = invoice_revenue               # درآمد فعلی از صورتحساب
-        self.invoice_cost = invoice_cost                     # هزینه‌های مربوط به صورتحساب
+        self.invoice_count = invoice_count
+        self.invoice_revenue = invoice_revenue
+        self.invoice_cost = invoice_cost
 
-        self.support_revenue = support_revenue               # درآمد پشتیبانی
-        self.support_cost = support_cost                     # هزینه پشتیبانی
+        self.support_revenue = support_revenue
+        self.support_cost = support_cost
 
-        self.equipment_revenue = equipment_revenue           # درآمد تجهیزات
-        self.equipment_cost = equipment_cost                 # هزینه تجهیزات
+        self.equipment_revenue = equipment_revenue
+        self.equipment_cost = equipment_cost
 
-        self.other_revenue = other_revenue                   # سایر درآمدها
-        self.other_cost = other_cost                         # سایر هزینه‌ها
+        self.other_revenue = other_revenue
+        self.other_cost = other_cost
 
-        self.success_count = success_count                   # تعداد موفق
-        self.failed_count = failed_count                     # تعداد ناموفق
+        self.success_count = success_count
+        self.failed_count = failed_count
 
     # -------------------------------
     # رفتارهای مالی بر اساس تعرفه جدید n
@@ -78,69 +86,3 @@ class CompanySnapshot:
         if total == 0:
             return 0
         return self.success_count / total
-
-
-
-
-#
-# class CompanySnapshot:
-#     def __init__(self,
-#                  number_invoice,
-#                  number_of_moadi,
-#                  invoice_revenue,
-#                  invoce_cost,
-#                  suport_revenue,
-#                  cost_revenue,
-#                  tools_revenue,
-#                  tools_cost,
-#                  other_revenue,
-#                  other_cost,
-#                  sucsess_invoice,
-#                  failde_invoice,
-#
-#                  ):
-#         self.number_invoice = number_invoice
-#         self.number_of_moadi= number_of_moadi
-#         self.invoice_revenue= invoice_revenue
-#         self.invoce_cost= invoce_cost
-#         self.suport_revenue= suport_revenue
-#         self.suport_cost= cost_revenue
-#         self.tools_revenue= tools_revenue
-#         self.tools_cost= tools_cost
-#         self.other_revenue= other_revenue
-#         self.other_cost= other_cost
-#         self.sucsess_invoice= sucsess_invoice
-#         self.failde_invoice= failde_invoice
-#
-#
-#     def invoice_renenue_new(self,n):
-#         return n * self.number_invoice
-#
-#     def total_reveneue_new(self,n):
-#         return (self.invoice_renenue_new(n)+
-#                 self.suport_revenue+
-#                 self.tools_revenue+
-#                 self.other_revenue)
-#
-#     def total_cost(self):
-#         return (self.suport_cost +
-#                 self.tools_cost+
-#                 self.invoce_cost+
-#                 self.other_cost)
-#
-#     def profit_new(self,n):
-#         return self.total_reveneue_new(n) - self.total_cost()
-#
-#
-#     def margin_new(self,n):
-#         revenue = self.total_reveneue_new(n)
-#         if revenue == 0:
-#             return 0
-#
-#         return self.profit_new(n) / revenue
-#
-#     def sucsess_rate(self):
-#         total = self.sucsess_invoice + self.failde_invoice
-#         if total ==0:
-#             return 0
-#         return self.sucsess_invoice / total

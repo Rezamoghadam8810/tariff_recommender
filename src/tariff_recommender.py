@@ -11,7 +11,7 @@ class TariffRecommender:
         self.settings =settings
         self.engine = engine
 
-    def find_nest_n(self,companies,n_values=None):
+    def find_best_n(self,companies,n_values=None):
         if n_values is None:
             n_values = range(self.settings.n_min,self.settings.n_max + 1)
 

@@ -11,7 +11,8 @@ class ModelSettings:
         target_budget: float,     # بودجه هدف سازمان
         min_margin: float,        # حداقل حاشیه سود قابل قبول برای سلامت شرکت
         n_min: int = 1,           # حداقل مقدار n قابل تست
-        n_max: int = 1000         # حداکثر مقدار n قابل تست
+        n_max: int = 1000 ,        # حداکثر مقدار n قابل تست
+        coverage_ratio=0.0
     ):
         self.weight_budget = weight_budget
         self.weight_health = weight_health
