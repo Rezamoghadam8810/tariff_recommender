@@ -12,7 +12,7 @@ class ModelSettings:
         min_margin: float,        # حداقل حاشیه سود قابل قبول برای سلامت شرکت
         n_min: int = 1,           # حداقل مقدار n قابل تست
         n_max: int = 1000 ,        # حداکثر مقدار n قابل تست
-        coverage_ratio=0.0
+        coverage_ratio:float =0.0
     ):
         self.weight_budget = weight_budget
         self.weight_health = weight_health
@@ -23,6 +23,7 @@ class ModelSettings:
 
         self.n_min = n_min
         self.n_max = n_max
+        self.coverage_ratio = coverage_ratio
 
     def validate_weights(self):
         total = self.weight_budget + self.weight_health + self.weight_quality

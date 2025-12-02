@@ -53,10 +53,23 @@ class ScoringEngine:
         # -----------------------------------------------------
         # 1) ستون بودجه
         # -----------------------------------------------------
+
         payout_total = sum(c.invoice_revenue_new(n) for c in companies)
 
-        diff = abs(payout_total - self.settings.target_budget)
-        score_budget = max(0, 1 - diff / self.settings.target_budget)
+        # هزینه کل شرکت‌ها (ثابت نسبت به n)
+        total_cost_all = sum(c.total_cost() for c in companies)
+
+        # هدف پرداخت براساس نسبت پوشش
+        target_payout = total_cost_all * self.settings.coverage_ratio
+
+        # اختلاف بین پرداخت واقعی و هدف
+        diff = abs(payout_total - target_payout)
+
+        # امتیاز بودجه
+        if target_payout == 0:
+            score_budget = 0
+        else:
+            score_budget = max(0, 1 - diff / target_payout)
 
         # -----------------------------------------------------
         # 2) ستون سلامت مالی شرکت‌ها
